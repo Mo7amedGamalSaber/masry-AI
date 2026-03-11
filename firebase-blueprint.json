@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "ChatSession": {
+      "title": "ChatSession",
+      "description": "A chat conversation session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "title", "lastUpdated"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A message within a chat session",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "image": { "type": "string" },
+        "groundingChunks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "uri": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["role", "text", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/users/{userId}/sessions/{sessionId}": {
+      "schema": "ChatSession",
+      "description": "Chat sessions for a user"
+    },
+    "/users/{userId}/sessions/{sessionId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages within a session"
+    }
+  }
+}

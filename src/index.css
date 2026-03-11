@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Amiri", serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply antialiased selection:bg-[#c5a059]/30;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/70 dark:bg-black/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 shadow-2xl;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-lg;
+  }
+
+  .ios-shadow {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  }
+}
+
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(197, 160, 89, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(139, 107, 61, 0.05) 0%, transparent 40%),
+    #fdfaf6;
+}
+
+.dark .atmosphere {
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(197, 160, 89, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(139, 107, 61, 0.02) 0%, transparent 40%),
+    #0a0a0a;
+}
+
+.egyptian-gradient {
+  background: linear-gradient(135deg, #c5a059 0%, #8b6b3d 100%);
+}
+
+.markdown-body {
+  @apply leading-relaxed;
+}
+
+.markdown-body p {
+  @apply mb-4;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  @apply font-bold mb-2 text-[#8b6b3d];
+}
+
+.dark .markdown-body h1, .dark .markdown-body h2, .dark .markdown-body h3 {
+  @apply text-[#c5a059];
+}
+
+.markdown-body ul, .markdown-body ol {
+  @apply mb-4 pr-6 list-disc;
+}
+
+.markdown-body li {
+  @apply mb-1;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-[#c5a059]/20 rounded-full;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-[#c5a059]/40;
+}

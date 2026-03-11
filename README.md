@@ -1,34 +1,20 @@
 <div align="center">
-
-# 🧠 Masry AI | الذكي المصري 🇪🇬
-### تم تطويره بواسطة المبرمج: **محمد جمال**
-
----
-
-**مشروع ذكاء اصطناعي وطني، واعد ومتكامل، مصمم لتقديم حلول ذكية بهوية مصرية أصيلة.**
-
-[🚀 عن المشروع](#-نظرة-عامة) • [🛠 التقنيات](#-التقنيات-المستخدمة) • [⚙️ الإعداد](#-طريقة-التشغيل) • [🤝 المساهمة](#-المساهمة)
-
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-## 🚀 نظرة عامة
-مشروع **Masry AI** هو نتاج جهود برمجية مكثفة قام بها **محمد جمال** لإنشاء منصة ذكاء اصطناعي (Generative AI) سريعة، مستقرة، ومتجاوبة، تضع احتياجات المستخدم المحلي في المقام الأول. تم التركيز على جودة الواجهة البرمجية لتقديم تجربة استثنائية.
+# Run and deploy your AI Studio app
 
-## ✨ المميزات الأساسية
-* **دعم كامل للهجة العامية:** تجربة تواصل طبيعية وفعالة.
-* **واجهة مستخدم احترافية:** تم تصميمها بدقة باستخدام React و Tailwind CSS.
-* **تكامل سلس:** مصمم ليكون نواة لمشاريع ذكية أكبر.
+This contains everything you need to run your app locally.
 
-## 🛠 التقنيات المستخدمة
-* **اللغات:** JavaScript / Node.js
-* **الواجهة:** React.js + Tailwind CSS
-* **القلب الذكي:** محركات Gemini AI المتقدمة (عبر SDK).
+View your app in AI Studio: https://ai.studio/apps/f5ca3ef8-9580-466a-b1ac-f8b8fee01148
 
----
+## Run Locally
 
-## 💻 طريقة التشغيل
-لإعداد المشروع محلياً، اتبع الخطوات التالية:
+**Prerequisites:**  Node.js
 
-1. **نسخ المستودع:**
-   ```bash
-   git clone [https://github.com/Mohamed-Gamal/masry-AI.git](https://github.com/Mohamed-Gamal/masry-AI.git)
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

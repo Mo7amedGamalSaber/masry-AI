@@ -1,0 +1,5 @@
+{
+  "name": "Masry AI - مصري ذكي",
+  "description": "تطبيق ذكاء اصطناعي مصري متطور يفهم الثقافة واللهجة المصرية ويساعدك في كل شيء.",
+  "requestFramePermissions": ["microphone"]
+}

@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidTimestamp(ts) {
+      return ts is string; // Simplified for now, in production use better validation
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'email']) &&
+             data.uid == request.auth.uid &&
+             isValidEmail(data.email);
+    }
+
+    function isValidSession(data) {
+      return data.keys().hasAll(['id', 'userId', 'title', 'lastUpdated']) &&
+             data.userId == request.auth.uid &&
+             data.title is string && data.title.size() > 0 && data.title.size() < 200;
+    }
+
+    function isValidMessage(data) {
+      return data.keys().hasAll(['role', 'text', 'timestamp']) &&
+             data.role in ['user', 'model'] &&
+             data.text is string && data.text.size() > 0 && data.text.size() < 10000 &&
+             (!('image' in data) || data.image is string) &&
+             (!('groundingChunks' in data) || data.groundingChunks is list);
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isOwner(userId) && isValidUser(request.resource.data);
+
+      match /sessions/{sessionId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidSession(request.resource.data);
+        allow delete: if isOwner(userId);
+
+        match /messages/{messageId} {
+          allow read: if isOwner(userId);
+          allow create: if isOwner(userId) && isValidMessage(request.resource.data);
+        }
+      }
+    }
+  }
+}
